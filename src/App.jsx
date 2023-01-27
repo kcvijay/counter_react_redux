@@ -1,30 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCount } from "./Features/Counter/checkSlice";
-import { increment } from "./Features/Counter/checkSlice";
-
-import Button from "./Button";
+import {
+  incByAmount,
+  decByAmount,
+  resetCounter,
+} from "./Features/Counter/checkSlice";
 
 const App = () => {
   const count = useSelector(selectCount);
+  const dispatch = useDispatch();
 
-  // const handleMinusFive = () => {
-  //   setNumber(number - 5);
-  // };
-
-  // const handleMinusOne = () => {
-  //   setNumber(number - 1);
-  // };
-
-  // const resetHandler = () => {
-  //   setNumber(0);
-  // };
-
-  // const handlePlusOne = () => {};
-
-  // const handlePlusFive = () => {
-  //   setNumber(number + 5);
-  // };
   return (
     <div className="counter max-w-[1200px] my-[25px] mx-[auto] p-4 flex flex-col items-center">
       <header>Counter with React Redux</header>
@@ -32,11 +18,11 @@ const App = () => {
         {count}
       </div>
       <div className="action-btns flex justify-center items-center flex-wrap gap-4">
-        <Button text={"Decrease 5"} />
-        <Button text={"Decrease 1"} />
-        <Button text={"Reset"} />
-        <Button text={"Increase 1"} />
-        <Button text={"Increase 5"} />
+        <button onClick={() => dispatch(decByAmount(5))}>Decrease 5</button>
+        <button onClick={() => dispatch(decByAmount(1))}>Decrease 1</button>
+        <button onClick={() => dispatch(resetCounter())}>Reset</button>
+        <button onClick={() => dispatch(incByAmount(1))}>Increase 1</button>
+        <button onClick={() => dispatch(incByAmount(5))}>Increase 5</button>
       </div>
     </div>
   );

@@ -3,16 +3,24 @@ import { createSlice } from "@reduxjs/toolkit"; // From toolkit lib
 export const counterSlice = createSlice({
   name: "counter",
   initialState: {
-    value: 1000,
+    value: 0,
   },
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    incByAmount: (state, action) => {
+      state.value += action.payload;
+    },
+
+    decByAmount: (state, action) => {
+      state.value -= action.payload;
+    },
+
+    resetCounter: (state) => {
+      state.value = 0;
     },
   },
 });
 
-export const { increment } = counterSlice.actions;
-export const selectCount = (state) => state.counter.value;
+export const { incByAmount, decByAmount, resetCounter } = counterSlice.actions; // Connecting with the actions.
+export const selectCount = (state) => state.counter.value; //Showing the value
 
-export default counterSlice.reducer;
+export default counterSlice.reducer; // For Store
